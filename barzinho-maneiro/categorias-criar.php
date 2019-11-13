@@ -1,4 +1,5 @@
-<?php require_once 'cabecalho.php'; ?>
+<?php require_once 'cabecalho.php'; 
+?>
 
 <h2>Criar nova categoria</h2>
 <form name="nova-categoria" method="post" action="categorias-criar-post.php">
