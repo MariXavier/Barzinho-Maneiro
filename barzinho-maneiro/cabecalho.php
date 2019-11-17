@@ -27,7 +27,6 @@
                 <li><a href="categorias.php">Categorias</a></li>
                 <li><a href="produtos.php">Produtos</a></li>
                 <li><a href="usuarios.php">Usuários</a></li>
-                <li><a href="funcionario.php">Funcionários</a></li>
                 <li><a href="cardapio.php">Cardápio</a></li>
                 <li><a href="lancamentoPedido.php">Lançar pedido</a></li>
                 <li><a href="consultarComanda.php">Consultar comanda</a></li>

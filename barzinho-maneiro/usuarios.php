@@ -4,10 +4,7 @@
 <?php
 $usuario = new Usuario();
 $listaUsuarios = $usuario->listarUsuarios();
-echo "<pre>";
-print_r($listaUsuarios);
-echo "</pre>";
-?>
+?> 
 
 <h2>Usuários</h2>
 
@@ -15,9 +12,9 @@ echo "</pre>";
 
 <table class="table">
     <thead>
-        <th>pkUsuario</th>
+        <th>Nome</th>
         <th>Usuário</th>
-        <th>Senha</th>
+        <th>Tipo</th>
         <th></th>
     </thead>
     <tbody>
@@ -25,11 +22,11 @@ echo "</pre>";
         foreach($listaUsuarios as $linha) 
         { ?>
             <tr>
-                <td><?php echo $linha['pkUsuario']; ?></td>
+                <td><?php echo $linha['nome']; ?></td>
                 <td><?php echo $linha['usuario']; ?></td>
-                <td><?php echo $linha['senha']; ?></td>
+                <td><?php echo ($linha['tipo'] == 10 ? "Funcionário" : "Gerente"); ?></td>
                 <td>
-                    <a href="usuarios-editar.php" class="btn btn-info"> Alterar </a>
+                    <a href="usuarios-editar.php?codigo=<?php echo $linha['pkUsuario']; ?>" class="btn btn-info"> Alterar </a>
                     <a href="usuarios-excluir.php" class="btn btn-danger"> Excluir </a>
                 </td>
             </tr>

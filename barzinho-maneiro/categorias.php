@@ -3,9 +3,9 @@ require_once 'classes/Categoria.php';
 
 $categoria = new Categoria();
 $lista = $categoria->listar();
-echo "<pre>";
-print_r($lista);
-echo "</pre>";
+// echo "<pre>";
+// print_r($lista);
+// echo "</pre>";
 
 
 require_once 'cabecalho.php';
