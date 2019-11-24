@@ -27,7 +27,7 @@ $listaUsuarios = $usuario->listarUsuarios();
                 <td><?php echo ($linha['tipo'] == 10 ? "Funcionário" : "Gerente"); ?></td>
                 <td>
                     <a href="usuarios-editar.php?codigo=<?php echo $linha['pkUsuario']; ?>" class="btn btn-info"> Alterar </a>
-                    <a href="usuarios-excluir.php" class="btn btn-danger"> Excluir </a>
+                    <a href="usuarios-excluir.php?codigo=<?php echo $linha['pkUsuario']; ?>" class="btn btn-danger"> Excluir </a>
                 </td>
             </tr>
         <?php 

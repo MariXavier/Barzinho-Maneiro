@@ -43,5 +43,12 @@
             $query = "UPDATE usuario SET usuario='".$usuario."', senha='".$senha."', nome='".$nome."', cpf='".$cpf."', tipo='".$tipo."' WHERE pkUsuario=".$pkUsuario;
             $conexao -> exec($query);
         }
+
+        public function excluirUsuario($pkUsuario)
+        {
+            $conexao = new PDO("mysql:host=127.0.0.1:3360; dbname=barzinho", "root", "");
+            $query = "DELETE FROM usuario WHERE pkUsuario=".$pkUsuario;
+            $conexao -> exec($query);
+        }
     }
 ?>
