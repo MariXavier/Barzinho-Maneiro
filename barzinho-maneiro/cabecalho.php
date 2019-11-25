@@ -7,6 +7,7 @@
     <title>Barzinho Maneiro</title>
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/app.css" rel="stylesheet">
+    <link href="css/lancarPedido.css" rel="stylesheet">
 </head>
 
 <body>
