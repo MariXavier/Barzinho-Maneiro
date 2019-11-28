@@ -5,9 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Barzinho Maneiro</title>
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/app.css" rel="stylesheet">
-    <link href="css/lancarPedido.css" rel="stylesheet">
+    <link href="/barzinho-maneiro/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/barzinho-maneiro/assets/css/app.css" rel="stylesheet">
+    <link href="/barzinho-maneiro/css/lancarPedido.css" rel="stylesheet">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
 </head>
 
 <body>
@@ -25,11 +26,11 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="categorias.php">Categorias</a></li>
+                <li><a href="/barzinho-maneiro/categoria/categorias.php">Categorias</a></li>
                 <li><a href="produtos.php">Produtos</a></li>
                 <li><a href="usuarios.php">Usuários</a></li>
                 <li><a href="cardapio.php">Cardápio</a></li>
-                <li><a href="lancamentoPedido.php">Lançar pedido</a></li>
+                <li><a href="/barzinho-maneiro/lancamentoPedido.php">Lançar pedido</a></li>
                 <li><a href="consultarComanda.php">Consultar comanda</a></li>
                 <li><a href="pagamento.php">Pagamento</a></li>
             </ul>
