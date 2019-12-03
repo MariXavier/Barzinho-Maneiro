@@ -1,5 +1,9 @@
 <?php
     require_once 'cabecalho.php';
+    require_once 'classes/Produto.php';
+
+    $produto = new Produto();
+    $listaProdutos = $produto -> listarProdutos();
 ?>
 
 <h2>Lançar pedido</h2>
@@ -18,36 +22,28 @@
     </div>
     <div class="conjunto-botao-pedido">
         <div id="btnCancelar" click=funcaoNova class="btn btn-danger">Cancelar</div>
-        <a href="#" class="btn btn-info">Limpar</a>
+        <a href="#" class="btn btn-info" id="btnLimpar">Limpar</a>
         <a href="#" class="btn btn-success">Finalizar</a>
     </div>
 </div>
 
 <div class="painel-content">
-    <div style="width:40%; margin-right: 20px;">
-        <div style="display: flex;">
-            <div class="botao-pedido">
-                <div class="imagem-pedido" style="background-image: url('Imagens/hamburguer.jpg');"></div>
-                <label>X-Burguer</label>
-            </div> 
-            <div class="botao-pedido">
-                <div class="imagem-pedido" style="background-image: url('Imagens/batata.png');"></div>
-                <label>Batata frita</label>
-            </div> 
-        </div>
-        <div style="display: flex;">
-            <div class="botao-pedido">
-                <div class="imagem-pedido" style="background-image: url('Imagens/refrigerante.jpg');"></div>
-                <label>Refrigerante</label>
-            </div> 
-            <div class="botao-pedido">
-                <div class="imagem-pedido" style="background-image: url('Imagens/cerveja.png');"></div>
-                <label>Cerveja</label>
-            </div> 
-        </div>
+    <div class="botao-content">
+        <?php 
+            foreach($listaProdutos as $prod)
+            {  
+        ?>
+                <div class="botao-pedido" id="<?php echo $prod["codigo"]; ?>">
+                    <div class="imagem-pedido" style="background-image: url('Imagens/hamburguer.jpg');"></div>
+                    <label><?php echo $prod["nome"]; ?></label>
+                </div> 
+                
+        <?php
+            }
+        ?>
     </div>
     <div class="tabela-pedido">
-        <table class="table">
+        <table class="table" id="tabelaPedido">
             <thead>
                 <tr>
                     <th>Produto</th>
@@ -76,30 +72,21 @@
                     <td><a href="#" class="btn btn-success">+</a></td>
                 </tr>
                 <tr>
-                    <td>Batata</td>
-                    <td>14</td>
-                    <td>14</td>
-                    <td>1</td>
+                    <td>Refrigerahte</td>
+                    <td>4</td>
+                    <td>8</td>
+                    <td>2</td>
                     <td><a href="#" class="btn btn-danger">-</a></td>
-                    <td>1</td>
+                    <td>2</td>
                     <td><a href="#" class="btn btn-success">+</a></td>
                 </tr>
                 <tr>
-                    <td>Batata</td>
-                    <td>14</td>
-                    <td>14</td>
-                    <td>1</td>
+                    <td>Cerveja</td>
+                    <td>6</td>
+                    <td>18</td>
+                    <td>3</td>
                     <td><a href="#" class="btn btn-danger">-</a></td>
-                    <td>1</td>
-                    <td><a href="#" class="btn btn-success">+</a></td>
-                </tr>
-                <tr>
-                    <td>Batata</td>
-                    <td>14</td>
-                    <td>14</td>
-                    <td>1</td>
-                    <td><a href="#" class="btn btn-danger">-</a></td>
-                    <td>1</td>
+                    <td>3</td>
                     <td><a href="#" class="btn btn-success">+</a></td>
                 </tr>
             </tbody>
@@ -109,10 +96,14 @@
 
 <?php require_once 'rodape.php' ?>
 
-
 <script>
-    console.log("oi");
-    console.log($("#btnCancelar"));
+
+    $("#btnLimpar").click(function()
+    {
+        console.log("clicka");
+        $(".tabela-pedido > .table > tbody").empty();
+    });
+
     $(".tabela-pedido > .table > tbody > tr").click(function()
     {
         $tds = $(this).find("td");
@@ -124,8 +115,46 @@
              // Prints out the text within the <td>
         });
         console.log(vetor);   
-        
     });
+
+    $(".botao-pedido").click(function()
+    {
+        console.log(this.id);  
+        $.ajax({url: "demo_test.txt", success: function(result){
+            $("#div1").html(result);
+        }});
+
+    });
+
+    function setLinhaPedido()
+    {
+
+        var $linha = $("<tr>"+
+                        "<td>X-Burguer</td>"+
+                        "<td>10,90</td>"+
+                        "<td>10,90</td>"+
+                        "<td>1</td>"+
+                        "<td><a href='#' class='btn btn-danger'>-</a></td>"+
+                        "<td>1</td>"+
+                        "<td><a href='#' class='btn btn-success'>+</a></td>"+
+                    "</tr>");
+    }
+
+    $("#btnXBurguer").click(function()
+    {
+        console.log("click");   
+        var $linha = $("<tr>"+
+                        "<td>X-Burguer</td>"+
+                        "<td>10,90</td>"+
+                        "<td>10,90</td>"+
+                        "<td>1</td>"+
+                        "<td><a href='#' class='btn btn-danger'>-</a></td>"+
+                        "<td>1</td>"+
+                        "<td><a href='#' class='btn btn-success'>+</a></td>"+
+                    "</tr>");
+        $("#tabelaPedido > tbody:last-child").append($linha);
+    });
+    
 
     // var $row = $(".tabela-pedido > .table > tbody > tr");       // Finds the closest row <tr> 
     // $tds = $row.find("td");             // Finds all children <td> elements

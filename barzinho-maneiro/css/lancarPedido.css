@@ -18,11 +18,22 @@
     margin-top: 20px;
 }
 
+.botao-content
+{
+    width: 40%;
+    max-width: 40%;
+    min-width: 40%;
+    margin-right: 20px;
+    display: flex;
+    flex-flow: wrap;
+    align-content: flex-start;
+}
+
 .botao-pedido
 {
-    width: 50%;
-    text-align: justify;
-    align-content: initial;
+    /* width: 50%; */
+    /* text-align: justify;
+    align-content: initial; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,6 +42,20 @@
     box-shadow: 0px 1px 2px #888;
     border-radius: 10px;
     cursor: pointer;
+    width: 140px;
+    height: 140px;
+    justify-content: center;
+
+}
+
+.botao-pedido:active
+{
+    box-shadow: 0px 1px 2px black;
+}
+
+.botao-pedido:hover
+{
+    background-color: #8080801c;
 }
 
 .imagem-pedido

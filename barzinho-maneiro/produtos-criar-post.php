@@ -7,8 +7,11 @@
     $categoria = $_POST['categoria'];
 
     $produto = new Produto();
-    $produto -> inserirProduto($codigo, $nome, $preco, $categoria);
+    $codigoIgual = $produto -> isCodigoExistente($codigo);
 
-    header('Location:produtos.php');
-
+    if($codigoIgual == false) 
+    { 
+        $produto -> inserirProduto($codigo, $nome, $preco, $categoria); 
+        header('Location:produtos.php');
+    }
 ?>

@@ -60,5 +60,22 @@
             $query = "DELETE FROM produto WHERE pkProduto = ".$pkProduto;
             $conexao ->exec($query);
         }
+
+        public function isCodigoExistente($codigo)
+        {   
+            $conexao = new PDO("mysql:host=127.0.0.1:3360; dbname=barzinho","root","");
+            $query = "SELECT * FROM Produto WHERE codigo='$codigo'";
+
+            $resultado = $conexao -> query($query);
+            $lista = $resultado ->fetchAll();
+
+            if(sizeof($lista)>0)
+            {
+                echo "Já existe um produto com esse código, por favor insira um código diferente";
+                return true;
+            }
+            else
+            { return false; }
+        }
     }
 ?>
