@@ -33,10 +33,10 @@
             foreach($listaProdutos as $prod)
             {  
         ?>
-                <div class="botao-pedido" id="<?php echo $prod["codigo"]; ?>">
+                <button class="botao-pedido" id="btn-<?php echo $prod["codigo"]; ?>" data-pkProduto="<?php echo $prod["pkProduto"]; ?>" data-nome="<?php echo $prod["nome"]; ?>" data-preco="<?php echo $prod["preco"]; ?>">
                     <div class="imagem-pedido" style="background-image: url('Imagens/hamburguer.jpg');"></div>
                     <label><?php echo $prod["nome"]; ?></label>
-                </div> 
+                </button> 
                 
         <?php
             }
@@ -46,6 +46,7 @@
         <table class="table" id="tabelaPedido">
             <thead>
                 <tr>
+                    <th></th>
                     <th>Produto</th>
                     <th>Preço unitário</th>
                     <th>Preço total</th>
@@ -53,42 +54,6 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>X-Burguer</td>
-                    <td>10,90</td>
-                    <td>21,80</td>
-                    <td>2</td>
-                    <td><a href="#" class="btn btn-danger">-</a></td>
-                    <td>2</td>
-                    <td><a href="#" class="btn btn-success">+</a></td>
-                </tr>
-                <tr>
-                    <td>Batata</td>
-                    <td>14</td>
-                    <td>14</td>
-                    <td>1</td>
-                    <td><a href="#" class="btn btn-danger">-</a></td>
-                    <td>1</td>
-                    <td><a href="#" class="btn btn-success">+</a></td>
-                </tr>
-                <tr>
-                    <td>Refrigerahte</td>
-                    <td>4</td>
-                    <td>8</td>
-                    <td>2</td>
-                    <td><a href="#" class="btn btn-danger">-</a></td>
-                    <td>2</td>
-                    <td><a href="#" class="btn btn-success">+</a></td>
-                </tr>
-                <tr>
-                    <td>Cerveja</td>
-                    <td>6</td>
-                    <td>18</td>
-                    <td>3</td>
-                    <td><a href="#" class="btn btn-danger">-</a></td>
-                    <td>3</td>
-                    <td><a href="#" class="btn btn-success">+</a></td>
-                </tr>
             </tbody>
         </table>
     </div>
@@ -104,56 +69,59 @@
         $(".tabela-pedido > .table > tbody").empty();
     });
 
-    $(".tabela-pedido > .table > tbody > tr").click(function()
-    {
-        $tds = $(this).find("td");
-        var vetor = [];
-
-        $.each($tds, function() 
-        {               // Visits every single <td> element
-            vetor.push($(this).text());
-             // Prints out the text within the <td>
-        });
-        console.log(vetor);   
-    });
-
     $(".botao-pedido").click(function()
     {
-        console.log(this.id);  
-        $.ajax({url: "demo_test.txt", success: function(result){
-            $("#div1").html(result);
-        }});
+        console.dir(this);
+        var nome = this.dataset.nome;
+        var preco = this.dataset.preco;
+        var pkProduto = this.dataset.pkproduto;
+        setLinhaPedido(nome,preco,pkProduto);
+        console.log($("#btn-"+pkProduto));
 
+        $("#btn-"+pkProduto).attr("disabled", true);
+        $("#btn-"+pkProduto).addClass("botao-desabilitado");
     });
 
-    function setLinhaPedido()
+    function setLinhaPedido(nome,preco,pkProduto)
     {
-
         var $linha = $("<tr>"+
-                        "<td>X-Burguer</td>"+
-                        "<td>10,90</td>"+
-                        "<td>10,90</td>"+
-                        "<td>1</td>"+
-                        "<td><a href='#' class='btn btn-danger'>-</a></td>"+
-                        "<td>1</td>"+
-                        "<td><a href='#' class='btn btn-success'>+</a></td>"+
+                        "<td><button class='btn btn-danger cancelar-produto' onclick='removerProduto(this,"+pkProduto+");'><label>-</label></button></td>"+
+                        "<td>"+nome+"</td>"+
+                        "<td>"+preco+"</td>"+
+                        "<td id=tdPreco"+pkProduto+">"+preco+"</td>"+
+                        "<td><button class='btn btn-danger' onclick='subtrair(this,"+pkProduto+","+preco+");'>-</button><label>1</label><button class='btn btn-success' onclick='adicionar(this,"+pkProduto+","+preco+");'>+</button></td>"+
                     "</tr>");
+        $("#tabelaPedido tbody:last-child").append($linha);
     }
 
-    $("#btnXBurguer").click(function()
+    function adicionar(elemento,pkProduto,preco)
     {
-        console.log("click");   
-        var $linha = $("<tr>"+
-                        "<td>X-Burguer</td>"+
-                        "<td>10,90</td>"+
-                        "<td>10,90</td>"+
-                        "<td>1</td>"+
-                        "<td><a href='#' class='btn btn-danger'>-</a></td>"+
-                        "<td>1</td>"+
-                        "<td><a href='#' class='btn btn-success'>+</a></td>"+
-                    "</tr>");
-        $("#tabelaPedido > tbody:last-child").append($linha);
-    });
+        var quantidade = parseFloat($(elemento).prev().text());
+        var precoTotal;
+        quantidade++;
+        $(elemento).prev().text(quantidade);
+        precoTotal = preco*quantidade;
+        $("#tdPreco"+pkProduto).text(precoTotal);
+    }
+
+    function subtrair(elemento,pkProduto,preco)
+    {
+        var quantidade = parseFloat($(elemento).next().text());
+        var precoTotal;
+        if(quantidade>0)
+        { 
+            quantidade--; 
+            $(elemento).next().text(quantidade);
+            precoTotal = preco*quantidade;
+            $("#tdPreco"+pkProduto).text(precoTotal);
+        }
+    }
+    function removerProduto(elemento,pkProduto)
+    {
+        $(elemento).closest("tr").empty();
+        $("#btn-"+pkProduto).attr("disabled", false);
+        $("#btn-"+pkProduto).removeClass("botao-desabilitado");
+    }
     
 
     // var $row = $(".tabela-pedido > .table > tbody > tr");       // Finds the closest row <tr> 
