@@ -7,7 +7,6 @@
         public $nome;
         public $cpf;
         public $tipo;
-        public $status;
 
         public function listarUsuarios()
         {

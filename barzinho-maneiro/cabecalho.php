@@ -8,6 +8,8 @@
     <link href="/barzinho-maneiro/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="/barzinho-maneiro/assets/css/app.css" rel="stylesheet">
     <link href="/barzinho-maneiro/css/lancarPedido.css" rel="stylesheet">
+    <link href="fontawesome/css/all.css" rel="stylesheet"/>
+    <script defer src="fontawesome/js/all.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
 </head>
 
