@@ -14,7 +14,7 @@
     <div class="linha-base-pedido">
         <div class="form-group">
             <label for="nome">Atendente</label>
-            <select class="form-control" name="atendente" required>
+            <select class="form-control" name="atendente" id="cbAtendente" required>
                 <?php foreach($listaUsuarios as $usuarios){ ?>
                     <option value="<?php echo $usuarios['pkUsuario']; ?>">
                         <?php echo $usuarios['nome']; ?>
@@ -24,7 +24,7 @@
         </div>
         <div class="form-group">
             <label for="nome">Forma pagamento</label>
-            <select class="form-control" name="pagamento" required>
+            <select class="form-control" name="pagamento" id="cbPagamento" required>
                 <option value="15">Dinheiro</option>
                 <option value="25">Débito</option>
                 <option value="35">Crédito</option>
@@ -165,36 +165,46 @@
 
     $("#btnFinalizar").click(function()
     {
-        var listaObjetos = [];
-        var objeto = {};
+        var pedido = {};
+        var listaProdutos = [];
 
         var $row = $(".tabela-pedido > .table > tbody > tr");    
         var $body = $(".tabela-pedido > .table > tbody");         
         var quantidadeLinhas = $row.find(".preco-tabela").length;
 
+        pkUsuario = $("#cbAtendente option:selected").val();
+        pkPagamento = $("#cbPagamento option:selected").val();
+        precoTotalPedido = $("#ctPrecoTotal").val();
+
+        pedido.pkUsuario = pkUsuario;
+        pedido.pkPagamento = pkPagamento;
+        pedido.precoTotalPedido = precoTotalPedido;
+        
         for(var i=0; i<quantidadeLinhas; i++)
         {
-            objeto = {};
+            produto = {};
             linhaPreco = $row.find(".preco-tabela")[i];
             linhaQuantidade = $row.find(".quantidade")[i];
             linhaPkProduto = $row.find(".pkProduto-tabela")[i];
+            
+            produto.preco = parseFloat($(linhaPreco).text());
+            produto.quantidade = parseFloat($(linhaQuantidade).text());
+            produto.pkProduto = parseFloat($(linhaPkProduto).text());
 
-            objeto.preco = parseFloat($(linhaPreco).text());
-            objeto.quantidade = parseFloat($(linhaQuantidade).text());
-            objeto.pkProduto = parseFloat($(linhaPkProduto).text());
-
-            listaObjetos.push(objeto);
+            listaProdutos.push(produto);
         }
+        pedido.listaProdutos = listaProdutos;
 
-        if(listaObjetos.length>0)
+        if(listaProdutos.length>0)
         {
             $.ajax(
             {
                 url: "lancar-pedido-post.php", 
                 type : 'post',
-                data: { pedido: listaObjetos },
+                data: { pedido: pedido },
                 success: function(result)
                 {
+                    console.dir(result);
                     $(".tabela-pedido > .table > tbody").empty();
                     $(".botao-content button").attr("disabled", false);
                     $(".botao-content button").removeClass("botao-desabilitado");
@@ -205,15 +215,5 @@
         else
         { alert("É necessário pelo menos um produto para lançar o pedido");}
     });
-
-    
-
-    // var $row = $(".tabela-pedido > .table > tbody > tr");       // Finds the closest row <tr> 
-    // $tds = $row.find("td");             // Finds all children <td> elements
-
-    // $.each($tds, function() {               // Visits every single <td> element
-    //     console.log($(this).text());        // Prints out the text within the <td>
-    // });
-
 
 </script>

@@ -24,17 +24,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php">Barzinho Maneiro</a>
+            <a class="navbar-brand" href="/barzinho-maneiro/index.php">Barzinho Maneiro</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="/barzinho-maneiro/categoria/categorias.php">Categorias</a></li>
                 <li><a href="/barzinho-maneiro/produtos.php">Produtos</a></li>
                 <li><a href="/barzinho-maneiro/usuarios.php">Usuários</a></li>
-                <li><a href="cardapio.php">Cardápio</a></li>
                 <li><a href="/barzinho-maneiro/lancamentoPedido.php">Lançar pedido</a></li>
-                <li><a href="consultarComanda.php">Consultar comanda</a></li>
-                <li><a href="pagamento.php">Pagamento</a></li>
+                <li><a href="historicoPedido.php">Histórico de pedido</a></li>
             </ul>
         </div><!--/.navbar-collapse -->
     </div>
