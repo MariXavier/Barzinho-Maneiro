@@ -8,11 +8,10 @@
     $data = date("Y-m-d H:i:s"); 
     $pkUsuario = $pedido["pkUsuario"];
     $pkPagamento = $pedido["pkPagamento"];
-
+    
     try
     {
         $conexao = new PDO("mysql:host=127.0.0.1:3360; dbname=barzinho","root","");
-    
         $stmt = $conexao->prepare("INSERT INTO pedido (precoTotal, dataPedido, fkUsuario, fkPagamento) VALUES(?,?,?,?)");
     
         try 

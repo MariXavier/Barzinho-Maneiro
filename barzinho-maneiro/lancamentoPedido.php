@@ -6,6 +6,10 @@
     $produto = new Produto();
     $listaProdutos = $produto -> listarProdutos();
 
+    // echo "<pre>";
+    // print_r($listaProdutos);
+    // echo "</pre>";
+
     $usuario = new Usuario();
     $listaUsuarios = $usuario->listarUsuarios();
 ?>
@@ -47,8 +51,8 @@
                 foreach($listaProdutos as $prod)
                 {  
             ?>
-                    <button class="botao-pedido" id="btn-<?php echo $prod["codigo"]; ?>" data-pkProduto="<?php echo $prod["pkProduto"]; ?>" data-nome="<?php echo $prod["nome"]; ?>" data-preco="<?php echo $prod["preco"]; ?>">
-                        <div class="imagem-pedido" style="background-image: url('Imagens/hamburguer.jpg');"></div>
+                    <button class="botao-pedido" id="btn-<?php echo $prod["pkProduto"]; ?>" data-pkProduto="<?php echo $prod["pkProduto"]; ?>" data-nome="<?php echo $prod["nome"]; ?>" data-preco="<?php echo $prod["preco"]; ?>">
+                        <div class="imagem-pedido" style="background-image: url('<?php echo $prod["caminho"] ?>');"></div>
                         <label><?php echo $prod["nome"]; ?></label>
                     </button> 
             <?php

@@ -10,10 +10,17 @@
         public function listarProdutos()
         {
             $conexao = new PDO("mysql:host=127.0.0.1:3360; dbname=barzinho","root","");
-            $query = 
-            "SELECT p.*, c.nome AS categoriaProduto FROM produto AS p 
+            
+            // $query = 
+            // "SELECT p.*, c.nome AS categoriaProduto FROM produto AS p 
+            // JOIN categoria AS c 
+            // WHERE p.fkCategoria = c.pkCategoria";
+            
+            $query = "SELECT p.*, c.nome AS categoriaProduto, a.caminho FROM produto AS p 
             JOIN categoria AS c 
-            WHERE p.fkCategoria = c.pkCategoria";
+            ON p.fkCategoria = c.pkCategoria
+            JOIN anexo AS a
+            ON p.fkAnexo = a.pkAnexo";
 
             $resultado = $conexao -> query($query);
             $lista = $resultado -> fetchAll();
@@ -24,9 +31,15 @@
         {
             $conexao = new PDO("mysql:host=127.0.0.1:3360; dbname=barzinho","root","");
             $query = 
-            "SELECT p.*, c.nome AS categoriaProduto FROM produto AS p 
+            "SELECT p.*, c.nome AS categoriaProduto, a.caminho AS anexoNome FROM produto AS p 
             JOIN categoria AS c 
-            WHERE p.pkProduto = ".$pkProduto." AND p.fkCategoria = c.pkCategoria";
+            ON p.fkCategoria = c.pkCategoria
+            JOIN anexo AS a
+            ON p.fkAnexo = a.pkAnexo
+            WHERE p.pkProduto = " .$pkProduto;
+            // "SELECT p.*, c.nome AS categoriaProduto FROM produto AS p 
+            // JOIN categoria AS c 
+            // WHERE p.pkProduto = ".$pkProduto." AND p.fkCategoria = c.pkCategoria";
 
             $resultado = $conexao ->query($query);
             $lista = $resultado ->fetchAll();
@@ -36,12 +49,12 @@
             }
         }
 
-        public function inserirProduto($codigo, $nome, $preco, $fkCategoria)
+        public function inserirProduto($codigo, $nome, $preco, $fkCategoria, $pkAnexo)
         {
             $conexao = new PDO("mysql:host=127.0.0.1:3360; dbname=barzinho","root","");
             $query = 
-            "INSERT INTO produto (codigo, nome, preco, fkCategoria) 
-            VALUES ('".$codigo."', '".$nome."', ".$preco.", ".$fkCategoria.")";
+            "INSERT INTO produto (codigo, nome, preco, fkCategoria, fkAnexo) 
+            VALUES ('".$codigo."', '".$nome."', ".$preco.", ".$fkCategoria.", ".$pkAnexo.")";
             $conexao ->exec($query);
         }
 
@@ -76,6 +89,33 @@
             }
             else
             { return false; }
+        }
+
+        public function inserirAnexoProduto($caminho)
+        {
+            try
+            {
+                $conexao = new PDO("mysql:host=127.0.0.1:3360; dbname=barzinho","root","");
+                $stmt = $conexao->prepare("INSERT INTO anexo (caminho) VALUES(?)");
+            
+                try 
+                {
+                    $conexao->beginTransaction();
+                    $stmt->execute(array($caminho));
+                    $pkAnexo = $conexao->lastInsertId();
+                    $conexao->commit();
+
+                    return $pkAnexo;
+                    
+                } catch(PDOExecption $e) 
+                {
+                    $conexao->rollback();
+                    print "Error!: " . $e->getMessage() . "</br>";
+                }
+            } catch( PDOExecption $e ) 
+            {
+                print "Error!: " . $e->getMessage() . "</br>";
+            }
         }
     }
 ?>
