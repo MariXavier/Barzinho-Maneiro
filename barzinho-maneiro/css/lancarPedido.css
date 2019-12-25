@@ -14,13 +14,18 @@
 {
     display: flex;
     align-self: flex-end;
-    /* width: 30%; */
     justify-content: flex-end;
 }
 
 .conjunto-botao-pedido button
 {
     margin-right: 15px;
+}
+
+.botao-historico
+{
+    display: flex;
+    align-self: flex-end;
 }
 
 .painel-content
@@ -42,9 +47,6 @@
 
 .botao-pedido
 {
-    /* width: 50%; */
-    /* text-align: justify;
-    align-content: initial; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -56,14 +58,7 @@
     height: 140px;
     justify-content: center;
     background-color: white;
-
 }
-
-.botao-pedido:active
-{
-    background-color: blue;
-}
-
 
 .botao-desabilitado
 {

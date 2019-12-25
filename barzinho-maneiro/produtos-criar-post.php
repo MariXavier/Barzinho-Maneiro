@@ -6,8 +6,6 @@
     $preco = $_POST['preco'];
     $categoria = $_POST['categoria'];
 
-    print_r ($_POST);
-    
     $produto = new Produto();
     $codigoIgual = $produto -> isCodigoExistente($codigo);
     

@@ -1,29 +1,33 @@
 <?php
     require_once 'cabecalho.php';
+    require_once 'classes/Usuario.php';
+
+    $usuario = new Usuario();
+    $listaUsuarios = $usuario -> listarUsuarios();
 ?>
 
 <h2>Histórico de pedidos</h2>
 
 
-
-
 <form name="pesquisar-historico-pedido" action="buscar-historico-pedido.php" method="post">
-    <div class="form-group">
-        <label>Funcionário</label>
-        <select class="form-control" name="funcionario" id="cbFuncionario">
-            <option value="1">Bob</option>
-            <option value="2">Bob Jr</option>
-        </select>
+    <div class="linha-base-pedido">
+        <div class="form-group">
+            <label>Funcionário</label>
+            <select class="form-control" name="funcionario" id="cbFuncionario">
+            <?php foreach($listaUsuarios as $usuario) { ?>
+                <option value="<?php echo $usuario["pkUsuario"] ?>"><?php echo $usuario["nome"] ?></option>    
+            <?php } ?>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="nome">Data</label>
+            <input type="text" name="data" id="ctData" class="form-control">
+        </div>
+        <div class="botao-historico">
+            <button type="submit" class="btn btn-success">Pesquisar</button>
+        </div>
     </div>
     
-    <div class="form-group">
-        <label for="nome">Data</label>
-        <input type="date" name= "data">
-    </div>
-
-    <input type="text" class="form-control" value="02-16-2012">
-
-    <button type="submit" class="btn btn-success">Pesquisar</button>
 </form>
 
 <table class="table">
@@ -48,5 +52,5 @@ require_once 'rodape.php';
 ?>
 
 <script>    
-    $('.datepicker').datepicker();
+    $(function(){ $('#ctData').datepicker(); });
 </script>   
