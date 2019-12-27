@@ -11,11 +11,6 @@
         {
             $conexao = new PDO("mysql:host=127.0.0.1:3360; dbname=barzinho","root","");
             
-            // $query = 
-            // "SELECT p.*, c.nome AS categoriaProduto FROM produto AS p 
-            // JOIN categoria AS c 
-            // WHERE p.fkCategoria = c.pkCategoria";
-            
             $query = "SELECT p.*, c.nome AS categoriaProduto, a.caminho FROM produto AS p 
             JOIN categoria AS c 
             ON p.fkCategoria = c.pkCategoria
@@ -37,9 +32,6 @@
             JOIN anexo AS a
             ON p.fkAnexo = a.pkAnexo
             WHERE p.pkProduto = " .$pkProduto;
-            // "SELECT p.*, c.nome AS categoriaProduto FROM produto AS p 
-            // JOIN categoria AS c 
-            // WHERE p.pkProduto = ".$pkProduto." AND p.fkCategoria = c.pkCategoria";
 
             $resultado = $conexao ->query($query);
             $lista = $resultado ->fetchAll();

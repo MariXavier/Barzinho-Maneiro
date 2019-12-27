@@ -37,7 +37,6 @@
                 <li><a href="/barzinho-maneiro/usuarios.php">Usuários</a></li>
                 <li><a href="/barzinho-maneiro/lancamentoPedido.php">Lançar pedido</a></li>
                 <li><a href="historicoPedido.php">Histórico de pedido</a></li>
-                <li><a href="datetimepicker.html">data</a></li>
             </ul>
         </div><!--/.navbar-collapse -->
     </div>

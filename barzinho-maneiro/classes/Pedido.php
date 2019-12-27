@@ -14,7 +14,7 @@
             echo $data;
             $conexao = new PDO("mysql:host=127.0.0.1:3360; dbname=barzinho","root","");
             
-            //$query = "SELECT * FROM ";
+            $query = "SELECT * FROM pedidoproduto as pp JOIN pedido as p ON pp.fkPedido = p.pkPedido join produto as prod on pp.fkProduto = prod.pkProduto join usuario as u on u.pkUsuario = p.fkUsuario join pagamento as pag on pag.pkPagamento = p.fkPagamento";
 
             $resultado = $conexao -> query($query);
             $lista = $resultado -> fetchAll();
