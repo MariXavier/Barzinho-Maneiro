@@ -32,6 +32,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
+                <li><a href="/barzinho-maneiro/tiposPagamento/tiposPagamentos.php">Forma pagamento</a></li>
                 <li><a href="/barzinho-maneiro/categoria/categorias.php">Categorias</a></li>
                 <li><a href="/barzinho-maneiro/produtos.php">Produtos</a></li>
                 <li><a href="/barzinho-maneiro/usuarios.php">Usuários</a></li>
