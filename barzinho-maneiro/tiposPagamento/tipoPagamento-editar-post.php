@@ -8,4 +8,6 @@
 
     $tipoPagamento = new TipoPagamento();
     $tipoPagamento -> alterarTipoPagamento($pkFormaPagamento, $codigo, $nome);
+    
+    header('Location:/barzinho-maneiro/tiposPagamento/tiposPagamentos.php');
 ?>

@@ -32,6 +32,7 @@
         <th style="text-align: center;">Data</th>
         <th style="text-align: center;">Funcionário</th>
         <th style="text-align: center;">Produtos</th>
+        <th style="text-align: center;">Pagamento</th>
         <th>Valor total</th>
     </thead>
     <tbody>

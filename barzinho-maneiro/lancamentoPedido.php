@@ -2,6 +2,7 @@
     require_once 'cabecalho.php';
     require_once 'classes/Produto.php';
     require_once 'classes/Usuario.php';
+    require_once 'classes/TipoPagamento.php';
 
     $produto = new Produto();
     $listaProdutos = $produto -> listarProdutos();
@@ -12,6 +13,9 @@
 
     $usuario = new Usuario();
     $listaUsuarios = $usuario->listarUsuarios();
+
+    $tipoPagamento = new TipoPagamento();
+    $listaTipoPagamentos = $tipoPagamento->listarTipoPagamentos();
 ?>
 <!-- method="post" action="lancar-pedido-post.php" -->
 <h2>Lançar pedido</h2>
@@ -29,10 +33,12 @@
         <div class="form-group">
             <label for="nome">Forma pagamento</label>
             <select class="form-control" name="pagamento" id="cbPagamento" required>
-                <option value="15">Dinheiro</option>
-                <option value="25">Débito</option>
-                <option value="35">Crédito</option>
-                <option value="45">Refeição</option>
+
+                <?php foreach($listaTipoPagamentos as $tp){ ?>
+                    <option value="<?php echo $tp['pkFormaPagamento']; ?>">
+                        <?php echo $tp['nome']; ?>
+                    </option>
+                <?php } ?> 
             </select>
         </div>
         <div>
@@ -208,7 +214,6 @@
                 data: { pedido: pedido },
                 success: function(result)
                 {
-                    console.dir(result);
                     $(".tabela-pedido > .table > tbody").empty();
                     $(".botao-content button").attr("disabled", false);
                     $(".botao-content button").removeClass("botao-desabilitado");

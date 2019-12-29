@@ -28,6 +28,7 @@ if(sizeof($listaPedidos) > 0)
                     <td style='text-align: center;'>".$pedido['dataPedido']."</td>
                     <td style='text-align: center;'>".$pedido['nomeFuncionario']."</td>
                     <td style='text-align: left;'>".$rowProduto."</td>
+                    <td style='text-align: center;'>".$pedido['nomePagamento']."</td>
                     <td>".$pedido['precoTotal']."</td>
                 </tr>";
     }
