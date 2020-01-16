@@ -14,7 +14,7 @@
             $query = "SELECT p.*, c.nome AS categoriaProduto, a.caminho FROM produto AS p 
             JOIN categoria AS c 
             ON p.fkCategoria = c.pkCategoria
-            JOIN anexo AS a
+            LEFT JOIN anexo AS a
             ON p.fkAnexo = a.pkAnexo";
 
             $resultado = $conexao -> query($query);
